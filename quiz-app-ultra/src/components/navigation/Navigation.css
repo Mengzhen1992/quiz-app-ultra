@@ -1,0 +1,42 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--secondary-color);
+}
+
+.navbar__list {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.navbar__list-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__button {
+  background: transparent;
+  border: none;
+  font-size: 3em;
+  border: 1px solid;
+  width: 100%;
+  padding: 0.1rem;
+  color: var(--navbar__icon-color);
+}
+
+.navbar__button--active {
+  background-color: var(--navbar__button-light);
+}
+
+.navbar__button:hover {
+  color: var(--navbar__icon-color--hover);
+}

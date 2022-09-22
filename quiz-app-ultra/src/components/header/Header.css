@@ -1,0 +1,8 @@
+.header {
+  font-family: var(--primary-font);
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: var(--secondary-color);
+  height: 5em;
+  line-height: 5em;
+}
