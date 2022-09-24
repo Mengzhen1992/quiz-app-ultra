@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/header/Header";
 import Navigation from "./components/navigation/Navigation";
 import Cards from "./pages/Cards";
@@ -18,7 +18,7 @@ import { faBookmark as farBookmark } from "@fortawesome/free-regular-svg-icons";
 
 library.add(faHouse, fasBookmark, faSquarePlus, faUser, farBookmark);
 
-const cards = [
+const initialCards = [
   {
     id: 1,
     question: "What does HTML stands for?",
@@ -37,7 +37,7 @@ const cards = [
   {
     id: 3,
     question: "What the following code return? ",
-    answer: ["false"],
+    answer: "false",
     tags: ["JS"],
     bookmarked: true,
   },
@@ -45,16 +45,40 @@ const cards = [
 
 function App() {
   const [page, setPage] = useState("home");
+  const [cards, setCards] = useState(initialCards);
+
+  function appendCard(question, answer, tag) {
+    const newCards = [
+      ...cards,
+      {
+        id: Math.random(),
+        question: question,
+        answer: answer,
+        tags: [tag],
+        bookmarked: false,
+      },
+    ];
+    setCards(newCards);
+  }
+
+  useEffect(() => {
+    localStorage.setItem("cards", JSON.stringify(cards));
+  }, [cards]);
+
+  function deleteCard(id) {
+    const updatedCards = cards.filter((card) => card.id !== id);
+    setCards(updatedCards);
+  }
 
   return (
     <div className="App">
       <Header />
       <main className="app__main">
-        {page === "home" && <Cards cards={cards} />}
+        {page === "home" && <Cards cards={cards} deleteCard={deleteCard} />}
         {page === "bookmark" && (
           <Cards cards={cards.filter((card) => card.bookmarked)} />
         )}
-        {page === "create" && <Create />}
+        {page === "create" && <Create appendCard={appendCard} />}
         {page === "profile" && <Profile />}
       </main>
       <Navigation page={page} setPage={setPage} />

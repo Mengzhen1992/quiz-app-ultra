@@ -62,3 +62,17 @@
   padding: 0.2em;
   border: 1px solid var(--border-color);
 }
+
+.card__delete {
+  background-color: var(--navbar__icon-color);
+  font-family: var(--secondary-font);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  display: block;
+  position: absolute;
+  right: 1em;
+  padding: 0.5em 0.5em;
+}

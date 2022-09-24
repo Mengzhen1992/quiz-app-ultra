@@ -2,7 +2,7 @@ import "./Card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-function Card({ question, answer, tags, bookmarked }) {
+function Card({ id, question, answer, tags, bookmarked, deleteCard }) {
   const [showAnswer, setShowAnswer] = useState(false);
   return (
     <section className="card">
@@ -25,6 +25,13 @@ function Card({ question, answer, tags, bookmarked }) {
           </li>
         ))}
       </ul>
+      <button
+        onClick={() => deleteCard(id)}
+        type="button"
+        className="card__delete"
+      >
+        Delete Card
+      </button>
     </section>
   );
 }
