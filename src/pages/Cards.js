@@ -1,7 +1,7 @@
 import Card from "../components/card/Card";
 import "./Cards.css";
 
-export default function Cards({ cards, deleteCard }) {
+export default function Cards({ cards, deleteCard, toggleBookmark }) {
   return (
     <div className="cards">
       {cards.map((card, index) => (
@@ -13,6 +13,7 @@ export default function Cards({ cards, deleteCard }) {
           answer={card.answer}
           bookmarked={card.bookmarked}
           deleteCard={deleteCard}
+          toggleBookmark={toggleBookmark}
         />
       ))}
     </div>

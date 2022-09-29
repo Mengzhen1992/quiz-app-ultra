@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import Cards from "./pages/Cards";
 import Create from "./pages/Create";
 import Profile from "./pages/Profile";
+import { Routes, Route } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 /* import { fab } from "@fortawesome/free-brands-svg-icons"; */
@@ -66,20 +67,61 @@ function App() {
   }, [cards]);
 
   function deleteCard(id) {
-    const updatedCards = cards.filter((card) => card.id !== id);
-    setCards(updatedCards);
+    const updatedDeleteCards = cards.filter((card) => card.id !== id);
+    setCards(updatedDeleteCards);
+  }
+
+  function toggleBookmark(id) {
+    const updatedToggleCard = cards.map((card) => {
+      if (card.id === id) card.bookmarked = !card.bookmarked;
+      return card;
+    });
+    setCards(updatedToggleCard);
   }
 
   return (
     <div className="App">
       <Header />
       <main className="app__main">
-        {page === "home" && <Cards cards={cards} deleteCard={deleteCard} />}
+        {/* {page === "home" && (
+          <Cards
+            cards={cards}
+            deleteCard={deleteCard}
+            toggleBookmark={toggleBookmark}
+          />
+        )}
         {page === "bookmark" && (
-          <Cards cards={cards.filter((card) => card.bookmarked)} />
+          <Cards
+            cards={cards.filter((card) => card.bookmarked)}
+            toggleBookmark={toggleBookmark}
+          />
         )}
         {page === "create" && <Create appendCard={appendCard} />}
-        {page === "profile" && <Profile />}
+        {page === "profile" && <Profile />} */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Cards
+                cards={cards}
+                deleteCard={deleteCard}
+                toggleBookmark={toggleBookmark}
+              />
+            }
+          />
+          <Route
+            path="/bookmark"
+            element={
+              <Cards
+                cards={cards.filter((card) => card.bookmarked)}
+                toggleBookmark={toggleBookmark}
+              />
+            }
+          />
+          <Route path="/create" element={<Create appendCard={appendCard} />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<h1>Not Found!</h1>} />
+        </Routes>
       </main>
       <Navigation page={page} setPage={setPage} />
     </div>

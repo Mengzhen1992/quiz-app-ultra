@@ -2,11 +2,23 @@ import "./Card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-function Card({ id, question, answer, tags, bookmarked, deleteCard }) {
+function Card({
+  id,
+  question,
+  answer,
+  tags,
+  bookmarked,
+  deleteCard,
+  toggleBookmark,
+}) {
   const [showAnswer, setShowAnswer] = useState(false);
   return (
     <section className="card">
-      <button type="button" className="card__bookmark-icon">
+      <button
+        onClick={() => toggleBookmark(id)}
+        type="button"
+        className="card__bookmark-icon"
+      >
         <FontAwesomeIcon icon={bookmarked ? "bookmark" : ["far", "bookmark"]} />
       </button>
       <p>{question}</p>
@@ -20,7 +32,7 @@ function Card({ id, question, answer, tags, bookmarked, deleteCard }) {
       {!showAnswer && <p className="card__answer-text">{answer}</p>}
       <ul className="card__tag-list">
         {tags.map((tag, index) => (
-          <li className="card__tag" key={tag}>
+          <li className="card__tag" key={index}>
             #{tag}
           </li>
         ))}

@@ -74,5 +74,6 @@
   display: block;
   position: absolute;
   right: 1em;
+  bottom: 0.3em;
   padding: 0.5em 0.5em;
 }
